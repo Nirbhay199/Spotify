@@ -1,5 +1,5 @@
 class Artist {
-  int id;
+  String id;
   String name;
   String about;
   String profilePic;

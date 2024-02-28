@@ -33,9 +33,9 @@ class ArtistsController extends GetxController {
       result["message"].forEach((e) {
         artist.add(Artist(
             name: e['name'],
-            id: e['id'],
+            id: e['_id'],
             about: e['about'],
-            profilePic: e['prfile_pic']));
+            profilePic: e['profile_pic']));
       });
     }
   }

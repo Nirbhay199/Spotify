@@ -1,6 +1,7 @@
 
 import 'package:firebase/app/storage/boxes.dart';
 import 'package:firebase/app/storage/user.dart';
+import 'package:firebase/app/ui/bottom_app_bar/bottom_appbar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive/hive.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: appColor,
+          bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent,),
         fontFamily: "AvenirNext",
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       ),
 
       home:Overlay(initialEntries: [
-        OverlayEntry(builder: (context) => const OnBoardScreen(),)
+        OverlayEntry(builder: (context) => user.get("user")!=null&&user.get("user")['message']['token']!=null?const BottomAppBarScreen():const OnBoardScreen(),)
       ],)
     );
   }

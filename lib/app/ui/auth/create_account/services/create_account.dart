@@ -16,8 +16,10 @@ class AccountService extends GetConnect {
   }
 
   createAccount(body) async {
+    print("$appBaseUrl$createAccountUrl");
     try{
       var response =await post("$appBaseUrl$createAccountUrl",body);
+      print(response.bodyString);
       return handleException.returnResponse(response: response);
     }catch(_){
       return HttpException("Something Went Wrong");

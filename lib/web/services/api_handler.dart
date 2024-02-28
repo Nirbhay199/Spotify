@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 class ApiHandler {
   Future<String> uploadMultiple(type, files, {List<Song>? songNames}) async {
+
     var formData = http.MultipartRequest(
         'POST', Uri.parse('$appBaseUrl$uploadUrl'));
     for (int i = 0; i < files.length; i++) {
@@ -20,6 +21,7 @@ class ApiHandler {
     var response = await formData.send();
     if (response.statusCode == 200) {
       var responseData = await response.stream.bytesToString();
+      print(responseData);
       return responseData;
     } else {
       return 'Failed to upload image. Status code: ${response.statusCode}';

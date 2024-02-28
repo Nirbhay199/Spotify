@@ -57,7 +57,7 @@ class AccountController extends GetxController{
         backgroundColor: spaceBlack,
         title: "Account Create",
         duration: const Duration(milliseconds: 900),
-        message: result['message'],
+        message: "Account Created",
       ));
       Get.to(const ChooseArtists());
     }else{

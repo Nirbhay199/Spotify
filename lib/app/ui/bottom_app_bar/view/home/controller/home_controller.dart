@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_tags/dart_tags.dart';
-import 'package:firebase/app/ui/home/services/api.dart';
+import 'package:firebase/app/ui/bottom_app_bar/view/home/services/api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -36,17 +35,22 @@ class HomeController extends GetxController {
     });
   }
 
-Future<bool> fetchSongs() async {
+  Future<bool> fetchSongs() async {
+    songs.clear();
     var result = await ApiServices().fetchSongs();
-    result['message'].forEach((song) async {
-      var image =await getAudioImage(song['audio_file']);
-      songs.add(Song(
-          id: song['id'],
-          audio_file: song['audio_file'],
-          singer_id: song['singer_id'],
-          song_name: song['song_name'],
-          image:image));
+    return  result['message'].forEach((song) async {
+      var image = await getAudioImage(song['audio_file']);
+      if (!songs.any((element) => element.id == song['_id'])) {
+        songs.add(Song(
+            id: song['_id'],
+            audioFile: song['audio_file'],
+            singerId: song['singer_id'],
+            name: song['name'],
+            image: image));
+        return true;
+      }
+
     });
-    return true;
+
   }
 }

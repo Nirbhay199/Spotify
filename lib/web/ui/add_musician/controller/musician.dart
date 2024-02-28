@@ -106,7 +106,8 @@ class MusicianController extends GetxController {
       List music = result2.split(',');
 
       for (int i = 0; i < audios.length; i++) {
-        songs.add({"songName": audios[i].songName.text, "audio": music[i]});
+        print(music);
+        songs.add({"name": audios[i].songName.text, "audio_file": music[i]});
       }
     }
     List image = result.split(',');

@@ -1,22 +1,22 @@
-import 'dart:typed_data';
-
-import 'package:firebase/app/ui/home/controller/home_controller.dart';
+import 'package:firebase/app/ui/auth/create_account/controller/artists.dart';
+import 'package:firebase/app/ui/bottom_app_bar/view/home/controller/home_controller.dart';
 import 'package:firebase/constant/color.dart';
+import 'package:firebase/widget/artist.dart';
+import 'package:firebase/widget/music.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../../../../widget/artist.dart';
-import '../../../../widget/music.dart';
-import '../../auth/create_account/controller/artists.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final ArtistsController artistsController;
+
+  final HomeController homeController;
+  const Home(
+      {super.key,
+      required this.artistsController,
+      required this.homeController});
 
   @override
   Widget build(BuildContext context) {
-    ArtistsController artistsController = Get.put(ArtistsController());
-    HomeController homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -81,9 +81,13 @@ class Home extends StatelessWidget {
               future: homeController.fetchSongs(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: greenColor,
+                  return Padding(
+                    padding:
+                    const EdgeInsets.only(top: 60),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: greenColor,
+                      ),
                     ),
                   );
                 } else {
@@ -101,13 +105,15 @@ class Home extends StatelessWidget {
                                 mainAxisExtent: 150),
                         itemBuilder: (context, index) {
                           return MusicAlbum(
-                              pic: homeController.songs[index].image,
-                              name: homeController.songs[index].song_name);
+                              song: homeController.songs[index]);
                         },
                       ));
                 }
               },
-            )
+            ),
+            SizedBox(
+              height: 100,
+            ),
           ],
         ),
       ),

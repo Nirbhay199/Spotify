@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:firebase/app/UI/auth/login/services/login.dart';
 import 'package:firebase/app/storage/boxes.dart';
-import 'package:firebase/app/ui/home/view/home.dart';
+import 'package:firebase/app/ui/bottom_app_bar/bottom_appbar_screen.dart';
+import 'package:firebase/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../../../constant/color.dart';
 
 class LoginController extends GetxController {
   final TextEditingController email = TextEditingController();
@@ -45,7 +44,7 @@ class LoginController extends GetxController {
         message: result['message'],
       ));
     } else {
-      Get.to(const Home());
+      Get.to(const BottomAppBarScreen());
     }
     print(result);
   }
